@@ -37,8 +37,9 @@ public class Conta {
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-
+    //linka com o cliente
     @OneToMany(mappedBy = "conta")
     @JsonIgnoreProperties("movimentacao")
     private List<Movimentacao> movimentacoes;
+    //linka com a movimentação
 }
