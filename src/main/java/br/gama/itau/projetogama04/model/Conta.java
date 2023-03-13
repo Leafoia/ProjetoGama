@@ -22,14 +22,14 @@ import lombok.Setter;
 public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Código")
-    private long numero_conta;
+    @Column(name = "Codigo")
+    private long numeroConta;
    
 
     private int agencia;
     
 
-    private int tipo_conta;
+    private int tipoConta;
 
 
     private double saldo;
@@ -39,7 +39,7 @@ public class Conta {
     private Cliente cliente;
     //linka com o cliente
     @OneToMany(mappedBy = "conta")
-    @JsonIgnoreProperties("movimentacao")
+    @JsonIgnoreProperties("conta")
     private List<Movimentacao> movimentacoes;
     //linka com a movimentação
 }

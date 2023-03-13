@@ -32,6 +32,6 @@ public class Cliente {
     private String telefone_cliente;
 
     @OneToMany(mappedBy = "cliente")
-    @JsonIgnoreProperties("conta")
+    @JsonIgnoreProperties("cliente")
     private List<Conta> contas;
 }

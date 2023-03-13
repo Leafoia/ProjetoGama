@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,5 +38,6 @@ public class Movimentacao {
 
     @ManyToOne
     @JoinColumn(name = "numero_conta")
+    @JsonIgnoreProperties("movimentacao")
     private Conta conta;
 }
