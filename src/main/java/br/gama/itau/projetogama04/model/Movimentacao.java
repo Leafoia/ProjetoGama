@@ -22,22 +22,22 @@ public class Movimentacao {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Código_Mov")
-    private long num_seq;
+    @Column(name = "CodigoMov")
+    private long numSeq;
     
 
-    private LocalDateTime data_operacao;
+    private LocalDateTime dataOperacao;
 
     private double valor;
 
-    private int tipo_operacao;
+    private int tipoOperacao;
 
     @Column(length = 255)
     private String descricao;
 
 
     @ManyToOne
-    @JoinColumn(name = "numero_conta")
+    @JoinColumn(name = "numeroConta")
     @JsonIgnoreProperties("movimentacao")
     private Conta conta;
 }

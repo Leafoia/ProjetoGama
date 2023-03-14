@@ -35,7 +35,7 @@ public class Conta {
     private double saldo;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "idCliente")
     private Cliente cliente;
     //linka com o cliente
     @OneToMany(mappedBy = "conta")
