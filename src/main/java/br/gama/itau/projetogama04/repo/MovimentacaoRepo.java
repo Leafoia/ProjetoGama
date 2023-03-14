@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import br.gama.itau.projetogama04.model.Movimentacao;
 
-public interface MotimentacaoRepo extends CrudRepository<Movimentacao, Long> {
+public interface MovimentacaoRepo extends CrudRepository<Movimentacao, Long> {
     
 }
