@@ -48,6 +48,9 @@ public class ClienteService {
         Cliente clienteInserido = repo.save(novoCliente);
         return clienteInserido;
     }
+	public Cliente newVeiculo(Cliente novoCliente) {
+		return null;
+	}
 
 
 
