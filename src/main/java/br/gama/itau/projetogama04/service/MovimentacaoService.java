@@ -26,4 +26,8 @@ public class MovimentacaoService {
         return repo.getMovimentacaoByConta(numeroConta);
 
     }
+
+    public List<Movimentacao> getAll() {
+        return null;
+    }
 }
