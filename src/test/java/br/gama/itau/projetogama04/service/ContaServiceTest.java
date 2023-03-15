@@ -92,6 +92,32 @@ public class ContaServiceTest {
         });  //Confirmar com o professor.
     }
 
+    @Test
+    public void alteraDadosConta_returnAlteraDadosConta_whenContaValida() {
+        // preparação
+        // BDDMOckito está nos ajudando a simular, como um duplê, o que a classe
+        // da dependência deveria fazer.
+        // Neste exemplo, quando o método findById for chamado, o comportamento simulado
+        // retorna os dados de um veículo válido que preparamos para o dublê (simulação)
+        BDDMockito.when(repo.findById(ArgumentMatchers.any(Long.class)))
+                .thenReturn(Optional.of(GenerateConta.contaValida()));
 
+        BDDMockito.when(repo.save(ArgumentMatchers.any(Conta.class)))
+                .thenReturn(GenerateConta.contaValida2());
+
+        Conta contaParaAlterar = GenerateConta.contaValida2();
+
+        // ação
+        Conta contaAtualizada = contaService.alterarDados(1D, 2L, contaParaAlterar);
+        //A syntaxe do saldo está correta?
+
+        // verificação
+        assertThat(contaAtualizada).isNotNull();
+        assertThat(contaAtualizada.getNumeroConta()).isEqualTo(2L);
+        assertThat(contaAtualizada.getAgencia()).isEqualTo(contaParaAlterar.getAgencia());
+
+        // verifica se o método save foi chamado 1 vez
+        verify(repo, Mockito.times(1)).save(contaParaAlterar);
+    }
 
 }
