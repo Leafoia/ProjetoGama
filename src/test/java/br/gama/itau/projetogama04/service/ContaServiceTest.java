@@ -1,6 +1,9 @@
 package br.gama.itau.projetogama04.service;
 
 import static org.mockito.Mockito.verify;
+
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -45,6 +48,22 @@ public class ContaServiceTest {
 
         // verifica se o método save foi chamado 1 vez
         verify(repo, Mockito.times(1)).save(novaConta);
+    }
+
+    @Test
+    public void newConta_returnNull_whenContaInvalida() {
+        // Não precisa de Mock pois o método save do repo não será chamado
+        // preparação
+        Conta contaValida = GenerateConta.contaValida();
+
+        // ação
+        Conta contaRetornada = contaService.newConta(contaValida);
+
+        // verificação
+        assertThat(contaRetornada).isNull();
+
+        // verifica que o método save não foi chamado
+        verify(repo, Mockito.times(0)).save(contaValida);
     }
 
 
