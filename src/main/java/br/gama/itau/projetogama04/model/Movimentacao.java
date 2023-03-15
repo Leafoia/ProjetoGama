@@ -1,6 +1,6 @@
 package br.gama.itau.projetogama04.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,11 +22,11 @@ public class Movimentacao {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CodigoMov")
+    @Column(name = "codigoMov")
     private long numSeq;
     
 
-    private LocalDateTime dataOperacao;
+    private LocalDate dataOperacao;
 
     private double valor;
 

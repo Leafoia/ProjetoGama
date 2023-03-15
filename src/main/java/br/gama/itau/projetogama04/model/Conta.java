@@ -28,7 +28,7 @@ import lombok.Setter;
 public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Codigo")
+    @Column(name = "codigo")
     private long numeroConta;
    
 
@@ -42,6 +42,7 @@ public class Conta {
 
     @ManyToOne
     @JoinColumn(name = "idCliente")
+    @JsonIgnoreProperties("contas")
     private Cliente cliente;
     //linka com o cliente
     @OneToMany(mappedBy = "conta")

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import br.gama.itau.projetogama04.model.Conta;
+
 import br.gama.itau.projetogama04.service.ContaService;
 
 @RestController
@@ -21,10 +23,10 @@ public class ContaController {
     
     @Autowired
     private ContaService contaService;
+   
 
     @GetMapping("/{numeroConta}")
     public ResponseEntity<Conta> getById(@PathVariable Long numeroConta) {
-
         Conta conta = contaService.getById(numeroConta);
         if(conta == null) {
             return ResponseEntity.notFound().build();
@@ -34,13 +36,13 @@ public class ContaController {
     
     }   
 
-    @GetMapping("/cliente/idCliente")
+    @GetMapping("/cliente/{idCliente}")
     public ResponseEntity<List<Conta>> getContasByCliente(@PathVariable long idCliente) {
-
+        
         List<Conta> conta = contaService.buscarContasPeloCliente(idCliente);
         if(conta == null) {
             return ResponseEntity.notFound().build();
-        }
+        } 
         
         return ResponseEntity.ok(conta);
     }
