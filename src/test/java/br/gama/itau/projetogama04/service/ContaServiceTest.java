@@ -66,5 +66,21 @@ public class ContaServiceTest {
         verify(repo, Mockito.times(0)).save(contaValida);
     }
 
+    @Test
+    public void getById_returnConta_whenIdExist() {
+        BDDMockito.when(repo.findById(ArgumentMatchers.any(Long.class)))
+                .thenReturn(Optional.of(GenerateConta.contaValida()));
+
+        Conta contaEncontrada = contaService.getById(1L);
+
+        assertThat(contaEncontrada)
+                .isNotNull();
+        assertThat(contaEncontrada.getNumeroConta())
+                .isGreaterThan(0);
+        assertThat(contaEncontrada.getAgencia())
+                .isEqualTo(GenerateConta.contaValida().getAgencia())
+                .isNotNull(); //Não aceitava isNotEmpty(). Utilizamos isNotNull().
+    }
+
 
 }
