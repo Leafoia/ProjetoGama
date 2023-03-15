@@ -1,12 +1,10 @@
 package br.gama.itau.projetogama04.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 
 import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import br.gama.itau.projetogama04.exception.NotFoundException;
 import br.gama.itau.projetogama04.model.Conta;
 import br.gama.itau.projetogama04.repo.ContaRepo;
 import br.gama.itau.projetogama04.util.GenerateConta;
@@ -81,6 +80,18 @@ public class ContaServiceTest {
                 .isEqualTo(GenerateConta.contaValida().getAgencia())
                 .isNotNull(); //Não aceitava isNotEmpty(). Utilizamos isNotNull().
     }
+
+    @Test
+    public void getById_throwException_whenIdNotExist() {
+        Conta novaConta = GenerateConta.novaContaToSave();
+
+        // verifica se uma exception do tipo NotFoundException é lançada
+        // () -> { } é uma chamada de método anônimo
+        assertThrows(NotFoundException.class, () -> {
+            contaService.getById(novaConta.getNumeroConta());
+        });  //Confirmar com o professor.
+    }
+
 
 
 }

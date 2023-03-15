@@ -13,6 +13,15 @@ public class GenerateConta {
             .build();
     }
 
+    public static Conta contaValida2() {
+        return Conta.builder()
+            .numeroConta(2)
+            .agencia(4004)
+            .tipoConta(1)
+            .saldo(200)
+            .build();
+    }
+
     public static Conta novaContaToSave() {
         return Conta.builder()
             
