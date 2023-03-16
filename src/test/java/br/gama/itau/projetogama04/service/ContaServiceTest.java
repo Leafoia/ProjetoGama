@@ -77,8 +77,7 @@ public class ContaServiceTest {
         assertThat(contaEncontrada.getNumeroConta())
                 .isGreaterThan(0);
         assertThat(contaEncontrada.getAgencia())
-                .isEqualTo(GenerateConta.contaValida().getAgencia())
-                .isNotNull(); //Não aceitava isNotEmpty(). Utilizamos isNotNull().
+                .isEqualTo(GenerateConta.contaValida().getAgencia()); //Não aceitava isNotEmpty(). Tipo int não retorna null nem empty.
     }
 
     @Test
@@ -89,7 +88,7 @@ public class ContaServiceTest {
         // () -> { } é uma chamada de método anônimo
         assertThrows(NotFoundException.class, () -> {
             contaService.getById(novaConta.getNumeroConta());
-        });  //Confirmar com o professor.
+        });  //Confirmarmado.
     }
 
     @Test
