@@ -18,7 +18,7 @@ import br.gama.itau.projetogama04.util.GenerateMovimentacao;
 
 @ExtendWith(MockitoExtension.class)
 public class MovimentacaoServiceTest {
-    
+
     @InjectMocks
     private MovimentacaoService movimentacaoService;
 
@@ -44,4 +44,19 @@ public class MovimentacaoServiceTest {
         // verifica se o método save foi chamado 1 vez
         verify(repo, Mockito.times(1)).save(novaMovimentacao);
     }
+
+    @Test
+    public void newMovimentacao_returnNull_whenMovimentacaoInvalida() {
+        Movimentacao movimentacaoValida = GenerateMovimentacao.movimentacaoValida();
+
+        // ação
+        Movimentacao movimentacaoRetornada = movimentacaoService.newMovimentacao(movimentacaoValida);
+
+        // verificação
+        assertThat(movimentacaoRetornada).isNull();
+
+        // verifica que o método save não foi chamado
+        verify(repo, Mockito.times(0)).save(movimentacaoValida);
+    }
+
 }
