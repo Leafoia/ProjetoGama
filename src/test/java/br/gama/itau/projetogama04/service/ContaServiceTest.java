@@ -119,4 +119,16 @@ public class ContaServiceTest {
         verify(repo, Mockito.times(1)).save(contaParaAlterar);
     }
 
+    @Test
+    public void alteraDadosConta_throwExceptions_whenContaInvalida() {
+
+        Conta contaParaAlterar = GenerateConta.contaValida();
+
+        assertThrows(NotFoundException.class, () -> {
+            contaService.getById(contaParaAlterar.getNumeroConta());
+        });  //tirar dúvida com o professor sobre como esse teste unitário se relaciona com um método válido num teste de conta inválido.
+
+
+
+    }
 }
