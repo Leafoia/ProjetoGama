@@ -77,5 +77,26 @@ public class ClienteServiceTest {
         verify(repo, Mockito.times(0)).save(clienteValido);
     }
 
+    
+    @Test
+    public void newCliente_returnNewCliente_whenClienteValido() {
+        // preparação
+        BDDMockito.when(repo.save(ArgumentMatchers.any(Cliente.class)))
+                .thenReturn(GenerateCliente.clienteValido());
+
+        Cliente novoCliente = GenerateCliente.novoClienteToSave();
+
+        // ação
+        Cliente clienteCriacao = clienteService.newCliente(novoCliente);
+
+        // verificação
+        assertThat(clienteCriacao).isNotNull(); //testa as informações do cliente
+        assertThat(clienteCriacao.getIdCliente()).isPositive();
+        assertThat(clienteCriacao.getCpfCliente()).isEqualTo(novoCliente.getCpfCliente());
+
+        // verifica se o método save foi chamado 1 vez
+        verify(repo, Mockito.times(1)).save(novoCliente);
+    }
+
 
 }
