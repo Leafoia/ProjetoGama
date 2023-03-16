@@ -2,6 +2,7 @@ package br.gama.itau.projetogama04.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.gama.itau.projetogama04.dto.ClienteDTO;
+import br.gama.itau.projetogama04.exception.NotFoundException;
 import br.gama.itau.projetogama04.model.Cliente;
 import br.gama.itau.projetogama04.repo.ClienteRepo;
 import br.gama.itau.projetogama04.util.GenerateCliente;
@@ -59,6 +61,16 @@ public class ClienteServiceTest {
         assertThat(listaClientes).isNotEmpty();
         // testa o Id do primeiro elemento (cliente) da lista
         assertThat(listaClientes.get(0).getIdCliente()).isEqualTo(GenerateCliente.clienteValido().getIdCliente());
+    }
+    @Test
+    public void getById_throwException_whenIdNotExist() {
+        Cliente novoCliente = GenerateCliente.novoClienteToSave();
+
+        // verifica se uma exception do tipo NotFoundException é lançada
+        // () -> { } é uma chamada de método anônimo
+        assertThrows(NotFoundException.class, () -> {
+            clienteService.getById(novoCliente.getIdCliente());
+        });  //Confirmarmado.
     }
 
     @Test
