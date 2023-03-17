@@ -4,6 +4,7 @@ package br.gama.itau.projetogama04.integration;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,6 +50,21 @@ public class ClienteControllerITTest {
 
         resposta.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.cpfCliente", CoreMatchers.is(novoCliente.getCpfCliente())));
+    }
+
+    @Test
+    public void getById_returnCliente_whenIdExist() throws Exception {
+        Cliente novoCliente = GenerateCliente.novoClienteToSave();
+
+        Cliente clienteCriado = clienteRepo.save(novoCliente);
+
+        // ação
+        ResultActions resposta = mockMvc.perform(get("/cliente/{idCliente}", clienteCriado.getIdCliente())
+                .contentType(MediaType.APPLICATION_JSON));
+
+        // verificar os resultados
+        resposta.andExpect(status().isOk())
+                .andExpect(jsonPath("$.cpfCliente", CoreMatchers.is(clienteCriado.getCpfCliente())));
     }
 
 }
