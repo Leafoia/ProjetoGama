@@ -1,10 +1,13 @@
 package br.gama.itau.projetogama04.integration;
 
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -65,6 +68,24 @@ public class ClienteControllerITTest {
         // verificar os resultados
         resposta.andExpect(status().isOk())
                 .andExpect(jsonPath("$.cpfCliente", CoreMatchers.is(clienteCriado.getCpfCliente())));
+    }
+
+    @Test
+    public void getAll_returnListClientes_whenSuccess() throws Exception {
+        // preparação
+        List<Cliente> lista = new ArrayList<>();
+        lista.add(GenerateCliente.novoClienteToSave());
+        lista.add(GenerateCliente.novoClienteToSave2());
+
+        clienteRepo.saveAll(lista);
+
+        // ação
+        ResultActions resposta = mockMvc.perform(get("/cliente").contentType(MediaType.APPLICATION_JSON));
+
+        // verificações
+        resposta.andExpect(status().isOk()) 
+                .andExpect(jsonPath("$.size()", CoreMatchers.is(lista.size())))
+                .andExpect(jsonPath("$[0].cpfCliente", CoreMatchers.is(GenerateCliente.clienteValido().getCpfCliente())));
     }
 
 }

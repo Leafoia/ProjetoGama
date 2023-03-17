@@ -20,4 +20,13 @@ public class GenerateCliente {
             .telefoneCliente("3197648246")
             .build();
     }
+
+    public static Cliente novoClienteToSave2() {
+        return Cliente.builder()
+            
+            .nomeCliente("Gertrudes Costa")
+            .cpfCliente("86579436965")
+            .telefoneCliente("3197967246")
+            .build();
+    }
 }
