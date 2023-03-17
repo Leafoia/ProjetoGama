@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -127,8 +129,22 @@ public class ContaServiceTest {
         assertThrows(NotFoundException.class, () -> {
             contaService.getById(contaParaAlterar.getNumeroConta());
         });  //tirar dúvida com o professor sobre como esse teste unitário se relaciona com um método válido num teste de conta inválido.
+    }
+    
+    @Test
+    public void buscarContasByCliente_returnListContas_whenClienteExist() {
+        List<Conta> contas = new ArrayList<>();
+        contas.add(GenerateConta.contaValida());
+        contas.add(GenerateConta.contaValida2());
 
+        BDDMockito.when(repo.getContasByCliente(1L)).thenReturn(contas);
 
+        List<Conta> listaRecuperada = contaService.buscarContasPeloCliente(1L);
 
+        assertThat(listaRecuperada).isNotNull();
+        assertThat(listaRecuperada).isNotEmpty();
+
+        // testa o Id do primeiro elemento (paciente) da lista
+        assertThat(listaRecuperada.get(0).getNumeroConta()).isEqualTo(GenerateConta.contaValida().getNumeroConta());
     }
 }

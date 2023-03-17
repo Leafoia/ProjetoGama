@@ -1,5 +1,9 @@
 package br.gama.itau.projetogama04.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.gama.itau.projetogama04.dto.ContaDTO;
 import br.gama.itau.projetogama04.model.Conta;
 
 public class GenerateConta {
@@ -31,4 +35,9 @@ public class GenerateConta {
             .build();
     }
 
+    public static List<ContaDTO> listaValida() {
+
+    List<ContaDTO> listaContasDTO = new ArrayList<>();
+    return listaContasDTO;
+    }
 }
