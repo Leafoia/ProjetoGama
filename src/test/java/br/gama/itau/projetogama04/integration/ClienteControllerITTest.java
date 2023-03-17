@@ -70,6 +70,7 @@ public class ClienteControllerITTest {
                 .andExpect(jsonPath("$.cpfCliente", CoreMatchers.is(clienteCriado.getCpfCliente())));
     }
 
+
     @Test
     public void getAll_returnListClientes_whenSuccess() throws Exception {
         // preparação

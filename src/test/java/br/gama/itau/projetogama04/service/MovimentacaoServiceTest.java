@@ -1,11 +1,10 @@
 package br.gama.itau.projetogama04.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,9 +16,11 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.gama.itau.projetogama04.dto.MovimentacaoDTO;
+import br.gama.itau.projetogama04.model.Conta;
 import br.gama.itau.projetogama04.model.Movimentacao;
 import br.gama.itau.projetogama04.repo.MovimentacaoRepo;
 import br.gama.itau.projetogama04.util.GenerateMovimentacao;
+
 
 @ExtendWith(MockitoExtension.class)
 public class MovimentacaoServiceTest {
@@ -29,6 +30,8 @@ public class MovimentacaoServiceTest {
 
     @Mock
     private MovimentacaoRepo repo;
+    
+
 
     @Test
     public void newMovimentacao_returnNewMovimentacao_whenMovimentacaoValida() {
@@ -36,7 +39,7 @@ public class MovimentacaoServiceTest {
         BDDMockito.when(repo.save(ArgumentMatchers.any(Movimentacao.class)))
                 .thenReturn(GenerateMovimentacao.movimentacaoValida());
 
-        Movimentacao novaMovimentacao = GenerateMovimentacao.novaMovimentacaoToSave();
+        Movimentacao novaMovimentacao = GenerateMovimentacao.novaMovimentacaoToSave(1);
 
         // ação
         Movimentacao movimentacaoCriada = movimentacaoService.newMovimentacao(novaMovimentacao);
@@ -66,16 +69,17 @@ public class MovimentacaoServiceTest {
 
     @Test
     public void buscarMovimentacoesByConta_returnListMovimentacoes_whenContaExist() {
+      
         List<Movimentacao> movimentacoes = new ArrayList<>();
         movimentacoes.add(GenerateMovimentacao.movimentacaoValida());
         movimentacoes.add(GenerateMovimentacao.movimentacaoValida2());
 
-        BDDMockito.when(repo.getMovimentacaoByConta(1L)).thenReturn(movimentacoes);
+        BDDMockito.when(repo.findByConta(ArgumentMatchers.any(Conta.class))).thenReturn(movimentacoes);
 
         List<MovimentacaoDTO> listaRecuperada = movimentacaoService.getMovId(1L);
 
         assertThat(listaRecuperada).isNotNull();
-        assertThat(listaRecuperada).isNotEmpty();
+        assertThat(listaRecuperada.size()).isEqualTo(2);
 
         // testa o Id do primeiro elemento (paciente) da lista
         assertThat(listaRecuperada.get(0).getNumSeq()).isEqualTo(GenerateMovimentacao.movimentacaoValida().getNumSeq());

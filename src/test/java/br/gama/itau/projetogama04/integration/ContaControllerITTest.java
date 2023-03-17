@@ -40,7 +40,7 @@ public class ContaControllerITTest {
     }
     @Test
     public void getById_returnConta_whenNumeroContaExist() throws Exception {
-        Conta novaConta = GenerateConta.novaContaToSave();
+        Conta novaConta = GenerateConta.novaContaToSave(1);
 
         Conta contaCriada = contaRepo.save(novaConta);
 
@@ -55,7 +55,7 @@ public class ContaControllerITTest {
 
     @Test
     public void newConta_returnContaInserida_whenDadosContaValida() throws Exception {
-        Conta novaConta = GenerateConta.novaContaToSave();
+        Conta novaConta = GenerateConta.novaContaToSave(1);
 
         ResultActions resposta = mockMvc.perform(post("/contas")
                         .content(ObjectMapper.writeValueAsString(novaConta))

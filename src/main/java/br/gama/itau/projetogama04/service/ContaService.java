@@ -49,7 +49,9 @@ public class ContaService {
     }
 
     public List<Conta> buscarContasPeloCliente (long idCliente) {
+
         return repo.getContasByCliente(idCliente);
+        
     }
 
     

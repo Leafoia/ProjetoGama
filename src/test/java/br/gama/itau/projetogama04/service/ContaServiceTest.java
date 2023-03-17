@@ -37,7 +37,7 @@ public class ContaServiceTest {
         BDDMockito.when(repo.save(ArgumentMatchers.any(Conta.class)))
                 .thenReturn(GenerateConta.contaValida());
 
-        Conta novaConta = GenerateConta.novaContaToSave();
+        Conta novaConta = GenerateConta.novaContaToSave(1);
 
         // ação
         Conta contaCriada = contaService.newConta(novaConta);
@@ -84,7 +84,7 @@ public class ContaServiceTest {
 
     @Test
     public void getById_throwException_whenIdNotExist() {
-        Conta novaConta = GenerateConta.novaContaToSave();
+        Conta novaConta = GenerateConta.novaContaToSave(1);
 
         // verifica se uma exception do tipo NotFoundException é lançada
         // () -> { } é uma chamada de método anônimo
