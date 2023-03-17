@@ -52,4 +52,16 @@ public class ContaControllerITTest {
         resposta.andExpect(status().isOk())
         .andExpect(jsonPath("$.agencia", CoreMatchers.is(contaCriada.getAgencia())));
     }
+
+    @Test
+    public void newConta_returnContaInserida_whenDadosContaValida() throws Exception {
+        Conta novaConta = GenerateConta.novaContaToSave();
+
+        ResultActions resposta = mockMvc.perform(post("/contas")
+                        .content(ObjectMapper.writeValueAsString(novaConta))
+                        .contentType(MediaType.APPLICATION_JSON));
+
+        resposta.andExpect(status().isCreated())
+                .andExpect(jsonPath("$.agencia", CoreMatchers.is(novaConta.getAgencia())));
+    }
 }
