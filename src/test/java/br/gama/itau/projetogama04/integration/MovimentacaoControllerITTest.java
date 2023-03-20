@@ -57,7 +57,11 @@ public class MovimentacaoControllerITTest {
 
     @Test
     public void newMovimentacao_returnMovimentacaoInserida_whenMovimentacaoValida() throws Exception {
-        Movimentacao novaMovimentacao = GenerateMovimentacao.novaMovimentacaoToSave(1);
+        Cliente cliente = GenerateCliente.novoClienteToSave();
+        cliente = clienteRepo.save(cliente);
+        Conta conta = GenerateConta.novaContaToSave(cliente.getIdCliente());
+        conta = contaRepo.save(conta);
+        Movimentacao novaMovimentacao = GenerateMovimentacao.novaMovimentacaoToSave(conta.getNumeroConta());
 
         ResultActions resposta = mockMvc.perform(post("/movimentacao")
                         .content(ObjectMapper.writeValueAsString(novaMovimentacao))

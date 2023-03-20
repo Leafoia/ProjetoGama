@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import br.gama.itau.projetogama04.exception.NotFoundException;
+import br.gama.itau.projetogama04.model.Cliente;
 import br.gama.itau.projetogama04.model.Conta;
 
 import br.gama.itau.projetogama04.repo.ContaRepo;
@@ -50,7 +51,7 @@ public class ContaService {
 
     public List<Conta> buscarContasPeloCliente (long idCliente) {
 
-        return repo.getContasByCliente(idCliente);
+        return repo.findByCliente(Cliente.builder().idCliente(idCliente).build());
         
     }
 

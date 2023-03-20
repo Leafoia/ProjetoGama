@@ -18,6 +18,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import br.gama.itau.projetogama04.exception.NotFoundException;
+import br.gama.itau.projetogama04.model.Cliente;
 import br.gama.itau.projetogama04.model.Conta;
 import br.gama.itau.projetogama04.repo.ContaRepo;
 import br.gama.itau.projetogama04.util.GenerateConta;
@@ -137,7 +138,7 @@ public class ContaServiceTest {
         contas.add(GenerateConta.contaValida());
         contas.add(GenerateConta.contaValida2());
 
-        BDDMockito.when(repo.getContasByCliente(1L)).thenReturn(contas);
+        BDDMockito.when(repo.findByCliente(ArgumentMatchers.any(Cliente.class))).thenReturn(contas);
 
         List<Conta> listaRecuperada = contaService.buscarContasPeloCliente(1L);
 

@@ -36,6 +36,15 @@ public class GenerateConta {
             .cliente(Cliente.builder().idCliente(numero).build())
             .build();
     }
+    public static Conta novaContaToSave2(long numero) {
+        return Conta.builder()
+            
+            .agencia(4002)
+            .tipoConta(2)
+            .saldo(200)
+            .cliente(Cliente.builder().idCliente(numero).build())
+            .build();
+    }
 
     public static List<ContaDTO> listaValida() {
 
