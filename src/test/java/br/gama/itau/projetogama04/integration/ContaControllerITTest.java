@@ -46,6 +46,7 @@ public class ContaControllerITTest {
 
     @Autowired
     private MovimentacaoRepo movimentacaoRepo;
+
     
 
     @BeforeEach
@@ -104,8 +105,8 @@ public class ContaControllerITTest {
                 .andExpect(jsonPath("$.size()", CoreMatchers.is(contas.size())))
                 .andExpect(jsonPath("$[0].agencia", CoreMatchers.is(GenerateConta.contaValida().getAgencia())));
 
-
-
     }
+
+
 
 }

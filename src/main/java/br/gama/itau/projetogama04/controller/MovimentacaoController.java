@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,5 +48,15 @@ public class MovimentacaoController {
         return ResponseEntity.ok(listaMovimentacao);
     }
 
+    // @PutMapping("/transferencia/{contaOrigem}/{contaDestino}/{valor}")
+    // public ResponseEntity<Boolean> putValores(@PathVariable long contaOrigem,@PathVariable long contaDestino,@PathVariable double valor) {
+    //     boolean valoresInseridos = movimentacaoService.transferirValores(contaOrigem, contaDestino, valor);
+     
+    //     if(valoresInseridos == false) {
+    //         return ResponseEntity.badRequest().build(); 
+    //     }
+
+    //     return ResponseEntity.ok(valoresInseridos);
+    // }             FALTA OS TESTE
 
 }

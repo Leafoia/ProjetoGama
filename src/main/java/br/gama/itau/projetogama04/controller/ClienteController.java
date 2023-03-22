@@ -25,6 +25,7 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity<List<ClienteDTO>> getAll() {
+        
         List<ClienteDTO> lista = clienteService.getAll();
 
         if(lista == null || lista.size() == 0) {
@@ -41,12 +42,13 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
         ClienteDTO clienteDTO = new ClienteDTO(cliente);
-        return ResponseEntity.status(HttpStatus.OK).body(clienteDTO);
+        return ResponseEntity.ok().body(clienteDTO);
     
     }   
 
     @PostMapping
     public ResponseEntity<Cliente> newCliente(@RequestBody Cliente novoCliente) {
+        
         Cliente clienteInserido = clienteService.newCliente(novoCliente);
 
         if(clienteInserido == null) {

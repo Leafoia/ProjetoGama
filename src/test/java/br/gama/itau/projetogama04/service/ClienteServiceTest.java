@@ -37,7 +37,7 @@ public class ClienteServiceTest {
         BDDMockito.when(repo.findById(ArgumentMatchers.any(Long.class)))
                 .thenReturn(Optional.of(GenerateCliente.clienteValido()));
 
-        Cliente clienteEncontrado = clienteService.getById(1L);
+        Cliente clienteEncontrado = clienteService.getById(1);
 
         assertThat(clienteEncontrado)
                 .isNotNull();

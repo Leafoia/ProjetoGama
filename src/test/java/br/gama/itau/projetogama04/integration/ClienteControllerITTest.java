@@ -23,6 +23,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.gama.itau.projetogama04.model.Cliente;
 import br.gama.itau.projetogama04.repo.ClienteRepo;
+import br.gama.itau.projetogama04.repo.ContaRepo;
+import br.gama.itau.projetogama04.repo.MovimentacaoRepo;
 import br.gama.itau.projetogama04.util.GenerateCliente;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -37,10 +39,18 @@ public class ClienteControllerITTest {
 
     @Autowired
     private ClienteRepo clienteRepo;
+
+    @Autowired
+    private ContaRepo contaRepo;
+
+    @Autowired
+    private MovimentacaoRepo movimentacaoRepo;
     
     
     @BeforeEach
     public void setup() {
+        movimentacaoRepo.deleteAll();
+        contaRepo.deleteAll();
         clienteRepo.deleteAll();
     }
 

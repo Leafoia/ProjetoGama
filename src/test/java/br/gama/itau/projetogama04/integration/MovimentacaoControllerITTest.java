@@ -90,4 +90,17 @@ public class MovimentacaoControllerITTest {
                 .andExpect(jsonPath("$.size()", CoreMatchers.is(movimentacoes.size())))
                 .andExpect(jsonPath("$[0].tipoOperacao", CoreMatchers.is(GenerateMovimentacao.movimentacaoValida().getTipoOperacao())));
     }
+
+    // @Test
+    // public void alteraDadosConta_returnAlteraDadosConta_whenContaExist() {
+    //     Cliente cliente = GenerateCliente.novoClienteToSave();
+    //     cliente = clienteRepo.save(cliente);
+        
+    //     Conta conta = GenerateConta.novaContaToSave(cliente.getIdCliente());
+    //     Conta contaAlterada = contaRepo.save(conta);
+
+
+    // }
+
+
 }

@@ -80,18 +80,17 @@ public class ContaServiceTest {
         assertThat(contaEncontrada.getNumeroConta())
                 .isGreaterThan(0);
         assertThat(contaEncontrada.getAgencia())
-                .isEqualTo(GenerateConta.contaValida().getAgencia()); //Não aceitava isNotEmpty(). Tipo int não retorna null nem empty.
+                .isEqualTo(GenerateConta.contaValida().getAgencia()); 
     }
 
     @Test
     public void getById_throwException_whenIdNotExist() {
-        Conta novaConta = GenerateConta.novaContaToSave(1);
 
-        // verifica se uma exception do tipo NotFoundException é lançada
-        // () -> { } é uma chamada de método anônimo
+        Conta novaConta = GenerateConta.novaContaToSave(1);
         assertThrows(NotFoundException.class, () -> {
             contaService.getById(novaConta.getNumeroConta());
         });  //Confirmarmado.
+        
     }
 
     @Test
@@ -110,8 +109,7 @@ public class ContaServiceTest {
         Conta contaParaAlterar = GenerateConta.contaValida2();
 
         // ação
-        Conta contaAtualizada = contaService.alterarDados(1D, 2L, contaParaAlterar);
-        //A syntaxe do saldo está correta?
+        Conta contaAtualizada = contaService.alterarDados(1, 2, contaParaAlterar);
 
         // verificação
         assertThat(contaAtualizada).isNotNull();
@@ -125,11 +123,12 @@ public class ContaServiceTest {
     @Test
     public void alteraDadosConta_throwExceptions_whenContaInvalida() {
 
-        Conta contaParaAlterar = GenerateConta.contaValida();
+        long numeroContaInvalido = 0;
 
         assertThrows(NotFoundException.class, () -> {
-            contaService.getById(contaParaAlterar.getNumeroConta());
-        });  //tirar dúvida com o professor sobre como esse teste unitário se relaciona com um método válido num teste de conta inválido.
+            contaService.getById(numeroContaInvalido);
+        });  
+        
     }
     
     @Test
